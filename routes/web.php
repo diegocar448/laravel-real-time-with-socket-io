@@ -23,6 +23,8 @@ Route::get('/create-post', function () {
         'body' => Str::random(400),
     ]);
 
+    //event(new PostCreated($post));
+
     return 'ok';
 });
 
