@@ -2,14 +2,15 @@
 
 namespace App\Events;
 
+use Carbon\Carbon;
 use App\Models\Post;
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class PostCreated implements ShouldBroadcast
 {
@@ -36,5 +37,15 @@ class PostCreated implements ShouldBroadcast
     {
         //return new PrivateChannel('channel-name');
         return new Channel('post-channel');
+    }
+
+    public function broadcastWith()
+    {
+        return [
+            'post' => [
+                'name' => $this->post->title,
+                'date' => Carbon::parse($this->post->created)->format('d/m/Y'),
+            ]
+        ];
     }
 }

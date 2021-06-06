@@ -1924,6 +1924,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _bus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../bus */ "./resources/js/bus.js");
+/* harmony import */ var _bus__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_bus__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -1937,9 +1939,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
+    var _this = this;
+
     this.loadPosts();
+    _bus__WEBPACK_IMPORTED_MODULE_1___default().$on("post.created", function (post) {
+      _this.posts.data.unshift(post);
+    });
   },
   data: function data() {
     return {
@@ -1950,13 +1958,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     loadPosts: function loadPosts() {
-      var _this = this;
+      var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/posts").then(function (response) {
         //console.log(response);
-        _this.posts = response.data;
+        _this2.posts = response.data;
       })["catch"](function (response) {
-        _this.$vToastify.error("Falha ao carregar os posts", "Erro");
+        _this2.$vToastify.error("Falha ao carregar os posts", "Erro");
       });
     }
   }
@@ -1972,12 +1980,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var _bus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bus */ "./resources/js/bus.js");
+/* harmony import */ var _bus__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bus__WEBPACK_IMPORTED_MODULE_0__);
+
 
 window.Echo.channel('laravel_database_post-channel').listen('PostCreated', function (e) {
-  console.log(e);
-  console.log(e.post);
-  vue__WEBPACK_IMPORTED_MODULE_0__.default.$vToastify.success("Titulo do post ".concat(e.post.title), 'Novo Post');
+  _bus__WEBPACK_IMPORTED_MODULE_0___default().$emit('post-created', e.post);
+  vue__WEBPACK_IMPORTED_MODULE_1__.default.$vToastify.success("Titulo do post ".concat(e.post.name), 'Novo Post');
 });
 
 /***/ }),
@@ -2050,6 +2060,16 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
 });
 
 __webpack_require__(/*! ./Echo */ "./resources/js/Echo.js");
+
+/***/ }),
+
+/***/ "./resources/js/bus.js":
+/*!*****************************!*\
+  !*** ./resources/js/bus.js ***!
+  \*****************************/
+/***/ (() => {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\resources\\js\\bus.js: Missing semicolon. (4:7)\n\n\u001b[0m \u001b[90m 2 |\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 3 |\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m exports \u001b[36mdefault\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mVue\u001b[39m()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n    at Parser._raise (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\parser\\lib\\index.js:810:17)\n    at Parser.raiseWithData (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\parser\\lib\\index.js:803:17)\n    at Parser.raise (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\parser\\lib\\index.js:764:17)\n    at Parser.semicolon (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\parser\\lib\\index.js:9937:10)\n    at Parser.parseExpressionStatement (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\parser\\lib\\index.js:13098:10)\n    at Parser.parseStatementContent (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\parser\\lib\\index.js:12687:19)\n    at Parser.parseStatement (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\parser\\lib\\index.js:12551:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\parser\\lib\\index.js:13140:25)\n    at Parser.parseBlockBody (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\parser\\lib\\index.js:13131:10)\n    at Parser.parseProgram (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\parser\\lib\\index.js:12478:10)\n    at Parser.parseTopLevel (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\parser\\lib\\index.js:12469:25)\n    at Parser.parse (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\parser\\lib\\index.js:14195:10)\n    at parse (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\parser\\lib\\index.js:14247:38)\n    at parser (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\core\\lib\\parser\\index.js:52:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\Users\\diegoc\\Documents\\Docker\\laravel-real-time-with-socket-io\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:82:38)");
 
 /***/ }),
 
